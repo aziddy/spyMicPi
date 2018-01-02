@@ -1,0 +1,27 @@
+-- PYTHON
+
+sudo pip install demjson
+
+
+-- NODE
+
+sudo apt-get install libasound2-dev
+npm install node-gyp
+
+https://learn.adafruit.com/adafruit-2-8-pitft-capacitive-touch/easy-install
+
+-sudo apt-get remove nodejs
+
+-install node and npm from apt-get
+
+-possiably remove node and maybe not npm
+
+-go to https://nodejs.org/dist/
+
+-get latest version and get arm7 for pi3
+
+-tar -xvzf  [downloaded file]
+
+-then go in to bin and drag NODE and NPM to /usr/bin and /usr/sbin
+
+fucking apt-get node version is old af so you need to download a pre compiled/prepackaged binary of a higher version
