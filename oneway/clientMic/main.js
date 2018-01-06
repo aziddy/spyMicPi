@@ -73,7 +73,6 @@ client.connect(PORT, HOST, function() {
 	theObject.msg = "4477"; // PI
 	client.write(JSON.stringify(theObject));
 	micInputStream.pipe(client);
-
 });
 
 
@@ -81,7 +80,6 @@ client.connect(PORT, HOST, function() {
 // data is what the server sent to this socket
 client.on('data', function(data) {
 	//console.log('DATA: ' + data);
-	
 });
 
 client.on('error', function(error) {
