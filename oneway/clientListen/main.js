@@ -3,8 +3,12 @@ var zlib = require('zlib');
 
 var inflate = new zlib.Inflate();
 
-var HOST = '127.0.0.1';
-var PORT = 6970;
+var HOST = '198.50.245.94';
+var PORT = 7455;
+
+
+//var HOST = '127.0.0.1';
+//var PORT = 6970;
 
 var Speaker = require('speaker');
  

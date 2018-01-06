@@ -1,30 +1,20 @@
 var net = require('net');
-var mic = require('mic');
 var zlib = require('zlib');
-var Speaker = require('speaker');
-
 //var gzip = zlib.createGzip();
 var inflate = new zlib.Inflate();
 
-var HOST = '127.0.0.1';
-var PORT = 6970;
+//var HOST = '127.0.0.1';
+//var PORT = 6970;
+
+var HOST = '198.50.245.94';
+var PORT = 7455;
 
 var clientListen = new Array();
 var clientMic = new Array();
- 
-// Create the Speaker instance 
-/*
-var speaker = new Speaker({
-	channels: 1,          // 2 channels 
-	bitDepth: 16,         // 16-bit samples 
-	sampleRate: 16000     // 44,100 Hz sample rate 
-});
- */
 
 
 net.createServer(function(sock) {
 
-	//sock.pipe(speaker);
     console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
     
     sock.on('data', function(data) {
