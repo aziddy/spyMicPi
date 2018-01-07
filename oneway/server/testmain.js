@@ -57,7 +57,7 @@ net.createServer(function(sock) {
 			}
 
 			if(sock == clientListenCom){
-				if(parsed.type == "id"){
+				if(parsed.type == "mic"){
 					var zeeObject = new Object();
 					zeeObject.type = "mic";
 

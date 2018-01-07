@@ -106,8 +106,10 @@ rl.on('line', (input) => {
 
 	if(input == 'on'){
 		zeeObject.msg = "on";
+		console.log('Setting Mic On');
 	}else if(input == 'off'){
 		zeeObject.msg = "off";
+		console.log('Setting Mic Off');
 	}
 
         clientCOM.write(JSON.stringify(zeeObject));
