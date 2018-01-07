@@ -1,5 +1,5 @@
 # spyMicPi
-Stream Mic Audio Stream from Pi to VPS to Remote Computer
+Stream Mic Audio from Pi to VPS to Remote Computer
 
 
 ## CLI Reporting No Audio Data Fed To Speaker (bufferunderflow) Mac OSX
