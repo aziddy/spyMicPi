@@ -8,4 +8,8 @@ Stream Mic Audio Stream from Pi to VPS to Remote Computer
 ```
 warning("Didn't have any audio data in callback (buffer underflow)");
 ```
- and comment it out
+comment it out then
+
+```
+npm rebuild speaker
+```
