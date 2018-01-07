@@ -2,6 +2,7 @@ var net = require('net');
 var zlib = require('zlib');
 //var gzip = zlib.createGzip();
 var inflate = new zlib.Inflate();
+var os = require('os');
 
 //var HOST = '127.0.0.1';
 //var PORT = 6970;
@@ -27,6 +28,8 @@ net.createServer(function(sock) {
         
 		bytesReceived += data.length;
 	//	console.log("Received: "+ (bytesReceived/1000000) + "MB");
+		console.log('Total Mem: '+os.totalmem());
+		console.log('Free Mem: '+os.freemem());
 
        try{
 			var parsed = JSON.parse(data);

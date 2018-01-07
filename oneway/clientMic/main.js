@@ -1,23 +1,15 @@
 var mic = require('mic');
 var fs = require('fs');
 var net = require('net');
-var Speaker = require('speaker');
-
 
 var HOST = '198.50.245.94';
 var PORT = 7455;
 
 //var HOST = '127.0.0.1';
 //var PORT = 6970;
- 
-// Create the Speaker instance 
-var speaker = new Speaker({
-  channels: 1,          // 2 channels 
-  bitDepth: 16,         // 16-bit samples 
-  sampleRate: 16000     // 44,100 Hz sample rate 
-});
 
-var micInstance = mic({ 'rate': '16000', 'channels': '1', 'debug': true, 'exitOnSilence': 6 });
+
+var micInstance = mic({ 'rate': '16000', 'channels': '1'});
 var micInputStream = micInstance.getAudioStream();
   
 //micInputStream.pipe(speaker);
@@ -43,16 +35,16 @@ micInputStream.on('stopComplete', function() {
     
 micInputStream.on('pauseComplete', function() {
         console.log("Got SIGNAL pauseComplete");
-        setTimeout(function() {
+/*        setTimeout(function() {
                 micInstance.resume();
-            }, 5000);
+            }, 5000);*/
     });
  
 micInputStream.on('resumeComplete', function() {
         console.log("Got SIGNAL resumeComplete");
-        setTimeout(function() {
+ /*       setTimeout(function() {
                 micInstance.stop();
-            }, 5000);
+            }, 5000);*/
     });
  
 micInputStream.on('silence', function() {
@@ -65,6 +57,7 @@ micInputStream.on('processExitComplete', function() {
  
 micInstance.start();
 
+var micOn = true;
 
 
 var clientCOM = new net.Socket();
@@ -88,8 +81,10 @@ clientCOM.on('data', function(data) {
 
                                 if(zeeMSG == 'on'){
                                         console.log("Mic On");
+					micInstance.resume();
                                 } else if(zeeMSG == 'off'){
-                                        console.log('Mic Off')
+                                        console.log('Mic Off');
+					micInstance.pause();
                                 }
 
                         }
@@ -140,4 +135,5 @@ client.on('error', function(error) {
 client.on('close', function() {
     console.log('Connection closed');
 });
+
 

@@ -100,16 +100,15 @@ var rl = readline.createInterface({
 });*/
 
 rl.on('line', (input) => {
-  console.log('Received:'+ input);
         var zeeObject = new Object();
         zeeObject.type = "mic";
 
 	if(input == 'on'){
 		zeeObject.msg = "on";
-		console.log('Setting Mic On');
+		console.log('--Setting Mic On');
 	}else if(input == 'off'){
 		zeeObject.msg = "off";
-		console.log('Setting Mic Off');
+		console.log('--Setting Mic Off');
 	}
 
         clientCOM.write(JSON.stringify(zeeObject));
