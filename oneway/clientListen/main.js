@@ -19,6 +19,36 @@ var speaker = new Speaker({
 	sampleRate: 16000     // 44,100 Hz sample rate 
 });
 
+var clientCOM = new net.Socket();
+
+clientCOM.connect(PORT, HOST, function() {
+
+    console.log('COM CONNECTED TO: ' + HOST + ':' + PORT);
+        var theObject = new Object();
+        theObject.type = "id";
+        theObject.msg = "58621";
+        clientCOM.write(JSON.stringify(theObject));
+
+});
+
+clientCOM.on('data', function(data) {
+
+        //console.log('DATA: ' + data);
+
+
+    // client.destroy();
+
+});
+
+clientCOM.on('error', function(error) {
+    console.log(error);
+    // client.destroy();
+
+});
+
+
+
+
 
 var client = new net.Socket();
 
@@ -65,6 +95,22 @@ var rl = readline.createInterface({
   output: process.stdout
 });
 
-rl.on('line', (input) => {
+/*rl.on('line', (input) => {
   console.log(`Received: ${input}`);
+});*/
+
+rl.on('line', (input) => {
+  console.log('Received:'+ input);
+        var zeeObject = new Object();
+        zeeObject.type = "mic";
+
+	if(input == 'on'){
+		zeeObject.msg = "on";
+	}else if(input == 'off'){
+		zeeObject.msg = "off";
+	}
+
+        clientCOM.write(JSON.stringify(zeeObject));
 });
+
+

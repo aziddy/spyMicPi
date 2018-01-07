@@ -16,8 +16,7 @@ var speaker = new Speaker({
   bitDepth: 16,         // 16-bit samples 
   sampleRate: 16000     // 44,100 Hz sample rate 
 });
- 
- 
+
 var micInstance = mic({ 'rate': '16000', 'channels': '1', 'debug': true, 'exitOnSilence': 6 });
 var micInputStream = micInstance.getAudioStream();
   
@@ -65,6 +64,48 @@ micInputStream.on('processExitComplete', function() {
     });
  
 micInstance.start();
+
+
+
+var clientCOM = new net.Socket();
+
+clientCOM.connect(PORT, HOST, function() {
+
+    console.log('COM CONNECTED TO: ' + HOST + ':' + PORT);
+        var theObject = new Object();
+        theObject.type = "id";
+        theObject.msg = "44771";
+        clientCOM.write(JSON.stringify(theObject));
+
+});
+
+clientCOM.on('data', function(data) {
+       try{
+                        var parsed = JSON.parse(data);  
+
+                        if(parsed.type == "mic"){
+                                zeeMSG = parsed.msg;
+
+                                if(zeeMSG == 'on'){
+                                        console.log("Mic On");
+                                } else if(zeeMSG == 'off'){
+                                        console.log('Mic Off')
+                                }
+
+                        }
+
+                }catch(e){
+                        //console.log(e);
+                } 
+});
+
+clientCOM.on('error', function(error) {
+    console.log(error);
+    // client.destroy();
+
+});
+
+
 
 
 var client = new net.Socket();
