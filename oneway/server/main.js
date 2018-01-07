@@ -24,7 +24,7 @@ net.createServer(function(sock) {
 
     console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
                 console.log('Total Mem: '+os.totalmem());
-                console.log('Free Mem: '+os.freemem());
+                console.log('Free Mem: '+ os.freemem());
 
     sock.on('data', function(data) {
         
@@ -58,6 +58,17 @@ net.createServer(function(sock) {
 				} else if(id == 58621){
 					console.log('Listen Client Communication Connected');
 					clientListenCom = sock;
+				}
+			}
+
+			if(sock == clientListenCom){
+				if(parsed.type == "server"){
+					if(parsed.msg == 'mem'){
+						var zeeObject = new Object();
+                                		zeeObject.type = "server";
+						zeeObject.msg = ('Free Mem: '+ os.freemem());
+						clientListenCom.write(JSON.stringify(zeeObject));
+					}
 				}
 			}
 

@@ -32,12 +32,17 @@ clientCOM.connect(PORT, HOST, function() {
 });
 
 clientCOM.on('data', function(data) {
+       try{
+                        var parsed = JSON.parse(data);
 
-        //console.log('DATA: ' + data);
+                        if(parsed.type == "server"){
+                                zeeMSG = parsed.msg;
+                                console.log(zeeMSG);
+                        }
 
-
-    // client.destroy();
-
+                }catch(e){
+                        //console.log(e);
+                }
 });
 
 clientCOM.on('error', function(error) {
@@ -114,6 +119,10 @@ rl.on('line', (input) => {
 		zeeObject.msg = 'off';
 		console.log('--Setting Mic Off');
 		endItAll = true;
+	}else if(input == 'mem'){
+		zeeObject.type = "server";
+		zeeObject.msg = "mem";
+                console.log('-- Getting Server\'s RAM amount ');
 	}
 
         clientCOM.write(JSON.stringify(zeeObject));
