@@ -2,10 +2,11 @@
 
 -- NODE
 
+PI3 with Raspbian
+
 sudo apt-get install libasound2-dev
 npm install node-gyp
 
-https://learn.adafruit.com/adafruit-2-8-pitft-capacitive-touch/easy-install
 
 -sudo apt-get remove nodejs
 
