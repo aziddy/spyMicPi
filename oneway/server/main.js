@@ -23,15 +23,15 @@ var bytesSent = 0;
 net.createServer(function(sock) {
 
     console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
-                console.log('Total Mem: '+os.totalmem());
-                console.log('Free Mem: '+ os.freemem());
+        //        console.log('Total Mem: '+os.totalmem());
+        //        console.log('Free Mem: '+ os.freemem());
 
     sock.on('data', function(data) {
-        
+	//	console.log('Total Mem: '+os.totalmem());
+        //        console.log('Free Mem: '+ os.freemem());
+
 		bytesReceived += data.length;
 	//	console.log("Received: "+ (bytesReceived/1000000) + "MB");
-	//	console.log('Total Mem: '+os.totalmem());
-	//	console.log('Free Mem: '+os.freemem());
 
        try{
 			var parsed = JSON.parse(data);
@@ -39,24 +39,21 @@ net.createServer(function(sock) {
 
 			if(parsed.type == "id"){
 				id = parseInt(parsed.msg);
-				//connectedUsers.push([id,sock]);
-				//console.log(connectedUsers);
-				
-				
+
 				if(id == 4477){
-					console.log("Mic Client Connected");
+				//	console.log("Mic Client Connected");
 					clientMic = sock;
 				} else if(id == 44771){
-					console.log('Mic Client Communication Connected');
+				//	console.log('Mic Client Communication Connected');
 					clientMicCom = sock;
 				}
 
 				if(id == 5862){
-					console.log("Listen Client Connected");
+				//	console.log("Listen Client Connected");
 					clientListen = sock;
 					clientMic.pipe(clientListen);
 				} else if(id == 58621){
-					console.log('Listen Client Communication Connected');
+				//	console.log('Listen Client Communication Connected');
 					clientListenCom = sock;
 				}
 			}
@@ -79,10 +76,10 @@ net.createServer(function(sock) {
 
 					if(parsed.msg == 'on'){
 						zeeObject.msg = "on";
-						console.log("mic on");
+				//		console.log("mic on");
 					}else if(parsed.msg == 'off'){
 						zeeObject.msg = "off";
-						console.log("mic off");
+				//		console.log("mic off");
 					}
 					clientMicCom.write(JSON.stringify(zeeObject));
 				}
@@ -90,20 +87,17 @@ net.createServer(function(sock) {
 
 		}catch(e){
 			//console.log(e);
-		} 
-		
+		}
     });
 
     sock.on('close', function(data) {
-        console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
+    //    console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
     });
 	sock.on('error', function(err){
 		console.log(err);
 	});
 
-
-    
 }).listen(PORT, HOST);
 
 
-console.log('Main Server listening on ' + HOST +':'+ PORT);
+//console.log('Main Server listening on ' + HOST +':'+ PORT);
