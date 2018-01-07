@@ -1,6 +1,3 @@
--- PYTHON
-
-sudo pip install demjson
 
 
 -- NODE
