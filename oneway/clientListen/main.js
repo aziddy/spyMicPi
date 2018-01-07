@@ -1,6 +1,6 @@
 var net = require('net');
 var zlib = require('zlib');
-
+var readline = require('readline');
 var inflate = new zlib.Inflate();
 
 var HOST = '198.50.245.94';
@@ -59,3 +59,12 @@ client.on('close', function() {
     console.log('Connection closed');
 });
 
+
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.on('line', (input) => {
+  console.log(`Received: ${input}`);
+});
