@@ -102,6 +102,7 @@ var rl = readline.createInterface({
 rl.on('line', (input) => {
         var zeeObject = new Object();
         zeeObject.type = "mic";
+	var endItAll = false;
 
 	if(input == 'on'){
 		zeeObject.msg = "on";
@@ -109,9 +110,20 @@ rl.on('line', (input) => {
 	}else if(input == 'off'){
 		zeeObject.msg = "off";
 		console.log('--Setting Mic Off');
+	}else if(input == 'close'){
+		zeeObject.msg = 'off';
+		console.log('--Setting Mic Off');
+		endItAll = true;
 	}
 
         clientCOM.write(JSON.stringify(zeeObject));
+
+	if(endItAll){
+                console.log('Closing');
+                client.destroy();
+                clientCOM.destroy();
+		process.exit();
+	}
 });
 
 
