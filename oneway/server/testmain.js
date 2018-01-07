@@ -26,7 +26,7 @@ net.createServer(function(sock) {
     sock.on('data', function(data) {
         
 		bytesReceived += data.length;
-		console.log("Received: "+ (bytesReceived/1000000) + "MB");
+	//	console.log("Received: "+ (bytesReceived/1000000) + "MB");
 
        try{
 			var parsed = JSON.parse(data);
@@ -63,8 +63,10 @@ net.createServer(function(sock) {
 
 					if(parsed.msg == 'on'){
 						zeeObject.msg = "on";
+						console.log("mic on");
 					}else if(parsed.msg == 'off'){
 						zeeObject.msg = "off";
+						console.log("mic off");
 					}
 					clientMicCom.write(JSON.stringify(zeeObject));
 				}
