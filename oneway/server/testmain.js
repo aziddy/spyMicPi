@@ -23,13 +23,15 @@ var bytesSent = 0;
 net.createServer(function(sock) {
 
     console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
-    
+                console.log('Total Mem: '+os.totalmem());
+                console.log('Free Mem: '+os.freemem());
+
     sock.on('data', function(data) {
         
 		bytesReceived += data.length;
 	//	console.log("Received: "+ (bytesReceived/1000000) + "MB");
-		console.log('Total Mem: '+os.totalmem());
-		console.log('Free Mem: '+os.freemem());
+	//	console.log('Total Mem: '+os.totalmem());
+	//	console.log('Free Mem: '+os.freemem());
 
        try{
 			var parsed = JSON.parse(data);
